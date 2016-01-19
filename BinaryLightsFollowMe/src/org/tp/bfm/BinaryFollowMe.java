@@ -6,11 +6,13 @@ import fr.liglab.adele.icasa.device.presence.PresenceSensor;
 import fr.liglab.adele.icasa.device.light.BinaryLight;
 import fr.liglab.adele.icasa.device.light.DimmerLight;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.tp.bfm.config.FollowMeConfig;
+
 import fr.liglab.adele.icasa.device.light.Photometer;
 
 public class BinaryFollowMe implements DeviceListener<GenericDevice>, FollowMeConfig {
@@ -227,7 +229,7 @@ public class BinaryFollowMe implements DeviceListener<GenericDevice>, FollowMeCo
 					List<BinaryLight> sameLocationLigths = getBinaryLightFromLocation(detectorLocation);
 					// Get the dimmer lights in the location the event occurs
 					List<DimmerLight> sameLocationDimmerLigths = getDimmerLightFromLocation(detectorLocation);
-					// Get the dimmer lights in the location the event occurs
+					// Get the photometers in the location the event occurs
 					List<Photometer> sameLocationPhotometers = getPhotometerFromLocation(detectorLocation);
 					if (changingSensor.getSensedPresence()) {
 						double dimmerLightPower = 0.0;
@@ -240,21 +242,23 @@ public class BinaryFollowMe implements DeviceListener<GenericDevice>, FollowMeCo
 						}
 						if (sameLocationPhotometers.get(0).getIlluminance() >= targetedIlluminance) {
 							sameLocationLigths.get(0).turnOff();
+							lightOn -= 1;
 						}
-						
+
 						// Energy consumed by binary lights
 						energyConsumed = lightOn * energyBinaryLight;
 						// Power dimmer lights to reach the
-						
-						while (dimmerLightPower < 1.0
-								&& energyConsumed < maximumEnergyConsumptionAllowedInARoom
-								&& sameLocationPhotometers.get(0).getIlluminance() < targetedIlluminance) {
+
+						while (energyConsumed < maximumEnergyConsumptionAllowedInARoom
+								&& sameLocationPhotometers.get(0).getIlluminance() < targetedIlluminance
+								&& dimmerLightPower <= 0.99) {
 							dimmerLightPower += 0.01;
 							energyConsumed += 0.01 * energyBinaryLight;
 							sameLocationDimmerLigths.get(0).setPowerLevel(dimmerLightPower);
 						}
 						System.out.println("Illuminance value " + sameLocationPhotometers.get(0).getIlluminance());
 						System.out.println("Dimmer value " + sameLocationDimmerLigths.get(0).getPowerLevel());
+						System.out.println("Energy consumed " + energyConsumed);
 					} else {
 						SwitchBinaryLights(sameLocationLigths, 0);
 						for (DimmerLight dimmerLight : sameLocationDimmerLigths) {
@@ -266,6 +270,7 @@ public class BinaryFollowMe implements DeviceListener<GenericDevice>, FollowMeCo
 		}
 		// If the modified device property is of PresenceSensor
 		else if (device instanceof BinaryLight) {
+
 			BinaryLight changingLight = (BinaryLight) device;
 
 			// If the light is changed in location
@@ -280,39 +285,38 @@ public class BinaryFollowMe implements DeviceListener<GenericDevice>, FollowMeCo
 						// presence
 						List<BinaryLight> sameLocationLigths = getBinaryLightFromLocation(detectorLocation);
 						List<DimmerLight> sameLocationDimmerLigths = getDimmerLightFromLocation(detectorLocation);
+						List<Photometer> sameLocationPhotometers = getPhotometerFromLocation(detectorLocation);
 						if (presenceSensor.getSensedPresence()) {
-							// The number of lights are already on
+							// Count the binary lights are off
 							for (BinaryLight binaryLight : sameLocationLigths) {
 								if (binaryLight.getPowerStatus()) {
 									lightOn += 1;
 								}
 							}
-
-							for (BinaryLight binaryLight : sameLocationLigths) {
-								if (!binaryLight.getPowerStatus() && lightOn < maxLightsOn) {
-									changingLight.turnOn();
-									lightOn += 1;
-								}
-							}
-
+							double dimmerLightPower = sameLocationDimmerLigths.get(0).getPowerLevel();
 							// Energy consumed by binary lights
-							energyConsumed = lightOn * energyBinaryLight;
-							// Power dimmer lights to reach the
+							energyConsumed = lightOn * energyBinaryLight + dimmerLightPower * energyBinaryLight;
 
-							for (DimmerLight dimmerLight : sameLocationDimmerLigths) {
-								double extraEnergy = maximumEnergyConsumptionAllowedInARoom - energyConsumed;
-								if (extraEnergy > 0) {
-									if (extraEnergy > energyBinaryLight) {
-										dimmerLight.setPowerLevel(1.0);
-										energyConsumed += 100.0;
-									} else {
-										dimmerLight.setPowerLevel(extraEnergy / 100);
-										energyConsumed += extraEnergy;
-									}
-								} else {
-									dimmerLight.setPowerLevel(0.0);
+							if (energyConsumed >= maximumEnergyConsumptionAllowedInARoom || lightOn >= maxLightsOn
+									|| sameLocationPhotometers.get(0).getIlluminance() >= targetedIlluminance) {
+								changingLight.turnOff();
+							} else {
+								changingLight.turnOn();
+								energyConsumed += energyBinaryLight;
+								while (energyConsumed >= maximumEnergyConsumptionAllowedInARoom
+										|| sameLocationPhotometers.get(0).getIlluminance() >= targetedIlluminance
+										|| dimmerLightPower > 0.01) {
+									dimmerLightPower -= 0.01;
+									sameLocationDimmerLigths.get(0).setPowerLevel(dimmerLightPower);
+									energyConsumed -= 0.01 * energyBinaryLight;
 								}
 							}
+
+							System.out.println("New location of binary light");
+							System.out.println("Illuminance value " + sameLocationPhotometers.get(0).getIlluminance());
+							System.out.println("Dimmer value " + sameLocationDimmerLigths.get(0).getPowerLevel());
+							System.out.println("Energy consumed " + energyConsumed);
+
 						} else {
 							changingLight.turnOff();
 						}
@@ -321,42 +325,51 @@ public class BinaryFollowMe implements DeviceListener<GenericDevice>, FollowMeCo
 				String oldLocation = oldValue.toString();
 				// System.out.println(oldLocation);
 				if (!oldLocation.equals(LOCATION_UNKNOWN)) {
+					int lightOff = 0;
 					// get the related presence sensors
 					List<PresenceSensor> oldLocationPresenceSensors = getPresenceSensorFromLocation(oldLocation);
 					for (PresenceSensor presenceSensor : oldLocationPresenceSensors) {
-						List<BinaryLight> oldLocationLigths = getBinaryLightFromLocation(oldLocation);
-						List<DimmerLight> sameLocationDimmerLigths = getDimmerLightFromLocation(oldLocation);
+						List<BinaryLight> oldLocationBinaryLigths = getBinaryLightFromLocation(oldLocation);
+						List<DimmerLight> oldLocationDimmerLigths = getDimmerLightFromLocation(oldLocation);
+						List<Photometer> oldLocationPhotometers = getPhotometerFromLocation(oldLocation);
 						if (presenceSensor.getSensedPresence()) {
-							for (BinaryLight binaryLight : oldLocationLigths) {
+							// Count the binary lights are off
+							for (BinaryLight binaryLight : oldLocationBinaryLigths) {
 								if (binaryLight.getPowerStatus()) {
 									lightOn += 1;
-								}
-							}
-							for (BinaryLight binaryLight : oldLocationLigths) {
-								if (!binaryLight.getPowerStatus() & lightOn < maxLightsOn) {
-									binaryLight.turnOn();
-									lightOn += 1;
-								}
-							}
-
-							// Energy consumed by binary lights
-							energyConsumed = lightOn * energyBinaryLight;
-							// Power dimmer lights to reach the
-
-							for (DimmerLight dimmerLight : sameLocationDimmerLigths) {
-								double extraEnergy = maximumEnergyConsumptionAllowedInARoom - energyConsumed;
-								if (extraEnergy > 0) {
-									if (extraEnergy > energyBinaryLight) {
-										dimmerLight.setPowerLevel(1.0);
-										energyConsumed += 100.0;
-									} else {
-										dimmerLight.setPowerLevel(extraEnergy / 100);
-										energyConsumed += extraEnergy;
-									}
 								} else {
-									dimmerLight.setPowerLevel(0.0);
+									lightOff += 1;
 								}
 							}
+							double dimmerLightPower = oldLocationDimmerLigths.get(0).getPowerLevel();
+							// Energy consumed by binary lights
+							energyConsumed = lightOn * energyBinaryLight + dimmerLightPower * energyBinaryLight;
+
+							if (lightOff > 0) {
+								if (energyConsumed < maximumEnergyConsumptionAllowedInARoom && lightOn < maxLightsOn
+										&& oldLocationPhotometers.get(0).getIlluminance() < targetedIlluminance) {
+									for (BinaryLight binaryLight : oldLocationBinaryLigths) {
+										if (!binaryLight.getPowerStatus()) {
+											binaryLight.turnOn();
+											lightOn += 1;
+											break;
+										}
+									}
+								}
+							} else {
+								while (energyConsumed < maximumEnergyConsumptionAllowedInARoom
+										&& oldLocationPhotometers.get(0).getIlluminance() < targetedIlluminance
+										&& dimmerLightPower < 0.99) {
+									dimmerLightPower += 0.01;
+									oldLocationDimmerLigths.get(0).setPowerLevel(dimmerLightPower);
+									energyConsumed += 0.01 * energyBinaryLight;
+								}
+							}
+
+							System.out.println("Old location of binary light");
+							System.out.println("Illuminance value " + oldLocationPhotometers.get(0).getIlluminance());
+							System.out.println("Dimmer value " + oldLocationDimmerLigths.get(0).getPowerLevel());
+							System.out.println("Energy consumed " + energyConsumed);
 						}
 					}
 				}
