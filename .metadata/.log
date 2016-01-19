@@ -952,3 +952,25 @@ org.osgi.framework.BundleException: Could not resolve module: org.ow2.chameleon.
 
 !ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-18 19:14:10.934
 !MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+!SESSION 2016-01-19 08:58:36.503 -----------------------------------------------
+eclipse.buildId=4.5.0.I20140806-2000
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.m2e 4 0 2016-01-19 08:58:39.842
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.ow2.chameleon.eclipse.ipojo.m2e [288]
+  Unresolved requirement: Import-Package: org.apache.maven.model
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
