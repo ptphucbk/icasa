@@ -1,0 +1,18 @@
+package org.tp.bfm;
+
+import java.util.List;
+
+import fr.liglab.adele.icasa.device.light.BinaryLight;
+
+public class LightControl {
+	public int SwitchBinaryLights (List<BinaryLight> sameLocationLigths, int lightOn){
+		for (BinaryLight binaryLight : sameLocationLigths) {
+			if (state) {
+				binaryLight.turnOn();
+			} else {
+				binaryLight.turnOff();
+			}
+		}
+		return 0;
+	}
+}

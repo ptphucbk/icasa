@@ -1,0 +1,284 @@
+package org.tp.bfm;
+
+import fr.liglab.adele.icasa.device.DeviceListener;
+import fr.liglab.adele.icasa.device.GenericDevice;
+import fr.liglab.adele.icasa.device.presence.PresenceSensor;
+import fr.liglab.adele.icasa.device.light.BinaryLight;
+import fr.liglab.adele.icasa.device.light.DimmerLight;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.tp.bfm.config.FollowMeConfig;
+
+public class BinaryFollowMe implements DeviceListener<GenericDevice>, FollowMeConfig {
+
+	/** Field for presenceSensors dependency */
+	private PresenceSensor[] presenceSensors;
+	/** Field for binaryLights dependency */
+	private BinaryLight[] binaryLights;
+	private DimmerLight[] dimmerLights;
+
+	public static final String LOCATION_PROPERTY_NAME = "Location";
+	public static final String LOCATION_UNKNOWN = "unknown";
+
+	/**
+	 * The maximum number of lights to turn on when a user enters the room :
+	 **/
+	private int maxLightsToTurnOnPerRoom = 2;
+
+	/** Bind Method for presenceSensors dependency */
+	public synchronized void bindPresenceSensor(PresenceSensor presenceSensor, Map properties) {
+		// TODO: Add your implementation code here
+		System.out.println("bind presence sensor " + presenceSensor.getSerialNumber());
+		presenceSensor.addListener(this);
+	}
+
+	/** Unbind Method for presenceSensors dependency */
+	public synchronized void unbindPresenceSensor(PresenceSensor presenceSensor, Map properties) {
+		// TODO: Add your implementation code here
+		System.out.println("Unbind presence sensor " + presenceSensor.getSerialNumber());
+		presenceSensor.removeListener(this);
+	}
+
+	private synchronized List<PresenceSensor> getPresenceSensorFromLocation(String location) {
+		List<PresenceSensor> presenceSensorsLocation = new ArrayList<PresenceSensor>();
+		for (PresenceSensor presenceSensor : presenceSensors) {
+			if (presenceSensor.getPropertyValue(LOCATION_PROPERTY_NAME).equals(location)) {
+				presenceSensorsLocation.add(presenceSensor);
+			}
+		}
+		return presenceSensorsLocation;
+	}
+
+	private synchronized List<BinaryLight> getBinaryLightFromLocation(String location) {
+		List<BinaryLight> binaryLightsLocation = new ArrayList<BinaryLight>();
+		for (BinaryLight binLight : binaryLights) {
+			if (binLight.getPropertyValue(LOCATION_PROPERTY_NAME).equals(location)) {
+				binaryLightsLocation.add(binLight);
+			}
+		}
+		return binaryLightsLocation;
+	}
+
+	private synchronized List<DimmerLight> getDimmerLightFromLocation(String location) {
+		List<DimmerLight> dimmerLightsLocation = new ArrayList<DimmerLight>();
+		for (DimmerLight dimLight : dimmerLights) {
+			if (dimLight.getPropertyValue(LOCATION_PROPERTY_NAME).equals(location)) {
+				dimmerLightsLocation.add(dimLight);
+			}
+		}
+		return dimmerLightsLocation;
+	}
+
+	/** Bind Method for binaryLights dependency */
+	public synchronized void bindBinaryLight(BinaryLight binaryLight, Map properties) {
+		// TODO: Add your implementation code here
+		System.out.println("bind binary light " + binaryLight.getSerialNumber());
+		binaryLight.addListener(this);
+	}
+
+	/** Unbind Method for binaryLights dependency */
+	public synchronized void unbindBinaryLight(BinaryLight binaryLight, Map properties) {
+		// TODO: Add your implementation code here
+		System.out.println("unbind binary light " + binaryLight.getSerialNumber());
+		binaryLight.removeListener(this);
+	}
+
+	/** Bind Method for dimmerLights dependency */
+	public synchronized void bindDimmerLight(DimmerLight dimmerLight, Map properties) {
+		// TODO: Add your implementation code here
+		System.out.println("bind dimmer light " + dimmerLight.getSerialNumber());
+		dimmerLight.addListener(this);
+	}
+
+	/** Unbind Method for dimmerLights dependency */
+	public synchronized void unbindDimmerLight(DimmerLight dimmerLight, Map properties) {
+		// TODO: Add your implementation code here
+		System.out.println("unbind dimmer light " + dimmerLight.getSerialNumber());
+		dimmerLight.removeListener(this);
+	}
+
+	/** Component Lifecycle Method */
+	public synchronized void stop() {
+		// TODO: Add your implementation code here
+		System.out.println("Component is stopping...");
+		for (PresenceSensor sensor : presenceSensors) {
+			sensor.removeListener(this);
+		}
+		for (BinaryLight binLight : binaryLights) {
+			binLight.removeListener(this);
+		}
+	}
+
+	/** Component Lifecycle Method */
+	public void start() {
+		// TODO: Add your implementation code here
+		System.out.println("Component is starting...");
+	}
+
+	@Override
+	public void deviceAdded(GenericDevice arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deviceEvent(GenericDevice arg0, Object arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void devicePropertyAdded(GenericDevice arg0, String arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void devicePropertyModified(GenericDevice device, String propertyName, Object oldValue, Object newValue) {
+
+		int lightOn = 0;
+		// we assume that we listen only to presence sensor events
+		// (otherwise
+		// there is a bug)
+		System.out.println(propertyName);
+		if (device instanceof PresenceSensor) {
+			// assert device instanceof PresenceSensor :
+			// "device must be a presence sensors only";
+
+			// based on that assumption we can cast the generic device without
+			// checking via instanceof
+			PresenceSensor changingSensor = (PresenceSensor) device;
+			// BinaryLight changingLight = (BinaryLight) device;
+
+			// check the change is related to presence sensing
+			if (propertyName.equals(PresenceSensor.PRESENCE_SENSOR_SENSED_PRESENCE)) {
+				// get the location of the changing sensor:
+				String detectorLocation = (String) changingSensor.getPropertyValue(LOCATION_PROPERTY_NAME);
+				// System.out.println("The device with the serial number" +
+				// changingSensor.getSerialNumber() + " has changed");
+				// System.out.println("This sensor is in the room :" +
+				// detectorLocation);
+				if (!detectorLocation.equals(LOCATION_UNKNOWN)) {
+					// get the related binary lights
+					List<BinaryLight> sameLocationLigths = getBinaryLightFromLocation(detectorLocation);
+					for (BinaryLight binaryLight : sameLocationLigths) {
+						// and switch them on/off depending on the sensed
+						// presence
+						if (changingSensor.getSensedPresence()) {
+							if (binaryLight.getPowerStatus()) {
+								lightOn += 1;
+							}
+						} else {
+							binaryLight.turnOff();
+						}
+					}
+					for (BinaryLight binaryLight : sameLocationLigths) {
+						// and switch them on/off depending on the sensed
+						// presence
+						if (changingSensor.getSensedPresence()) {
+							if (!binaryLight.getPowerStatus() & lightOn < maxLightsToTurnOnPerRoom) {
+								binaryLight.turnOn();
+								lightOn += 1;
+							}
+						}
+					}
+					List<DimmerLight> sameLocationDimmerLigths = getDimmerLightFromLocation(detectorLocation);
+					for (DimmerLight dimmerLight : sameLocationDimmerLigths) {
+						if (changingSensor.getSensedPresence()) {
+							dimmerLight.setPowerLevel(0.5);
+						} else {
+							dimmerLight.setPowerLevel(0.0);
+						}
+					}
+				}
+			}
+		} else if (device instanceof BinaryLight) {
+			BinaryLight changingLight = (BinaryLight) device;
+
+			// check the change is related to presence sensing
+			if (propertyName.equals("Location")) {
+				// get the location of the changing sensor:
+				String detectorLocation = (String) changingLight.getPropertyValue(LOCATION_PROPERTY_NAME);
+				if (!detectorLocation.equals(LOCATION_UNKNOWN)) {
+					// get the related presence sensors
+					List<PresenceSensor> sameLocationPresenceSensors = getPresenceSensorFromLocation(detectorLocation);
+					for (PresenceSensor presenceSensor : sameLocationPresenceSensors) {
+						// and switch them on/off depending on the sensed
+						// presence
+						List<BinaryLight> sameLocationLigths = getBinaryLightFromLocation(detectorLocation);
+						if (presenceSensor.getSensedPresence()) {
+							for (BinaryLight binaryLight : sameLocationLigths) {
+								if (binaryLight.getPowerStatus()) {
+									lightOn += 1;
+								}
+							}
+							for (BinaryLight binaryLight : sameLocationLigths) {
+								if (!binaryLight.getPowerStatus() & lightOn < maxLightsToTurnOnPerRoom) {
+									changingLight.turnOn();
+									lightOn += 1;
+								}
+							}
+						} else {
+							changingLight.turnOff();
+						}
+					}
+				}
+				String oldLocation = oldValue.toString();
+				// System.out.println(oldLocation);
+				if (!oldLocation.equals(LOCATION_UNKNOWN)) {
+					// get the related presence sensors
+					List<PresenceSensor> oldLocationPresenceSensors = getPresenceSensorFromLocation(oldLocation);
+					for (PresenceSensor presenceSensor : oldLocationPresenceSensors) {
+						List<BinaryLight> oldLocationLigths = getBinaryLightFromLocation(oldLocation);
+						if (presenceSensor.getSensedPresence()) {
+							for (BinaryLight binaryLight : oldLocationLigths) {
+								if (binaryLight.getPowerStatus()) {
+									lightOn += 1;
+								}
+							}
+							for (BinaryLight binaryLight : oldLocationLigths) {
+								if (!binaryLight.getPowerStatus() & lightOn < maxLightsToTurnOnPerRoom) {
+									binaryLight.turnOn();
+									lightOn += 1;
+								}
+							}
+						}
+					}
+				}
+			}
+		} else if (device instanceof DimmerLight) {
+
+		}
+
+	}
+
+	@Override
+	public void devicePropertyRemoved(GenericDevice arg0, String arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deviceRemoved(GenericDevice arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getMaximumNumberOfLightsToTurnOn() {
+		// TODO Auto-generated method stub
+		System.out.println("Get maximum number of lights to turn on");
+		return maxLightsToTurnOnPerRoom;
+	}
+
+	@Override
+	public void setMaximumNumberOfLightsToTurnOn(int maximumNumberOfLightsToTurnOn) {
+		// TODO Auto-generated method stub
+		System.out.println("Set maximum number of lights to turn on to " + maximumNumberOfLightsToTurnOn);
+		maxLightsToTurnOnPerRoom = maximumNumberOfLightsToTurnOn;
+	}
+
+}
