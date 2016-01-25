@@ -25,7 +25,8 @@ public class BinaryFollowMe implements DeviceListener<GenericDevice>, FollowMeCo
 	private DimmerLight[] dimmerLights;
 	/** Field for photometers dependency */
 	private Photometer[] photometers;
-
+    
+    /** Location constants */
 	public static final String LOCATION_PROPERTY_NAME = "Location";
 	public static final String LOCATION_UNKNOWN = "unknown";
 

@@ -6,6 +6,13 @@ package org.tp.fmm;
  */
 public interface FollowMeAdministration {
  
+
+    /** User preferences for illuminance */
+    public static final String USER_PROP_ILLUMINANCE = "illuminance";
+    public static final String USER_PROP_ILLUMINANCE_VALUE_SOFT = "SOFT";
+    public static final String USER_PROP_ILLUMINANCE_VALUE_MEDIUM = "MEDIUM";
+    public static final String USER_PROP_ILLUMINANCE_VALUE_FULL = "FULL";
+    
     /**
      * Sets the illuminance preference. The manager will try to adjust the
      * illuminance in accordance with this goal.
@@ -13,7 +20,7 @@ public interface FollowMeAdministration {
      * @param illuminanceGoal
      *            the new illuminance preference
      */
-    public void setIlluminancePreference(IlluminanceGoal illuminanceGoal);
+    public void setIlluminancePreference(String person, IlluminanceGoal illuminanceGoal);
  
     /**
      * Get the current illuminance preference.
@@ -33,5 +40,7 @@ public interface FollowMeAdministration {
      * @return the current energy goal.
      */
     public EnergyGoal getEnergyGoal();
+
+	public void setUserPreferences();
  
 }

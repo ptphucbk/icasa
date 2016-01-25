@@ -22,8 +22,7 @@ public class FollowMeCommandImpl {
     // Declare a dependency to a FollowMeAdministration service
     @Requires
     private FollowMeAdministration m_administrationService;
- 
- 
+  
     /**
      * Felix shell command implementation to sets the illuminance preference.
      *
@@ -32,23 +31,23 @@ public class FollowMeCommandImpl {
  
     // Each command should start with a @Command annotation
     @Command
-    public void setIlluminancePreference(String goal) {
+    public void setIlluminancePreference(String person, String goal) {
         // The targeted goal
         IlluminanceGoal illuminanceGoal;
  
         // TODO : Here you have to convert the goal string into an illuminance
         // goal and fail if the entry is not "SOFT", "MEDIUM" or "HIGH"
-        if (goal.equals("SOFT")){
+        if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_SOFT)){
         	illuminanceGoal = IlluminanceGoal.SOFT;
-        } else if (goal.equals("MEDIUM")){
+        } else if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_MEDIUM)){
         	illuminanceGoal = IlluminanceGoal.MEDIUM;
-        } else if (goal.equals("FULL")){
+        } else if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_FULL)){
         	illuminanceGoal = IlluminanceGoal.FULL;
         } else {
         	illuminanceGoal = null;
         }
         //call the administration service to configure it :
-        m_administrationService.setIlluminancePreference(illuminanceGoal);
+        m_administrationService.setIlluminancePreference(person, illuminanceGoal);
     }
  
     @Command

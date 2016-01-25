@@ -53,24 +53,28 @@ iPOJO-Components: instance { $component="FollowMeManager" $name="Follo
  configService" }manipulation { $classname="org.tp.fmm.impl.FollowMeMa
  nagerImpl" interface { $name="org.tp.fmm.FollowMeAdministration" }fie
  ld { $name="configService" $type="org.tp.bfm.config.FollowMeConfig" }
- method { $name="setIlluminancePreference" $arguments="{org.tp.fmm.Ill
- uminanceGoal}" $names="{illuminanceGoal}" }method { $name="getIllumin
- ancePreference" $return="org.tp.fmm.IlluminanceGoal" }method { $name=
- "stop" }method { $name="start" }method { $name="setEnergySavingGoal" 
- $arguments="{org.tp.fmm.EnergyGoal}" $names="{energyGoal}" }method { 
- $name="getEnergyGoal" $return="org.tp.fmm.EnergyGoal" }}}component { 
- $name="org.tp.fmm.command.FollowMeCommandImpl" $classname="org.tp.fmm
- .command.FollowMeCommandImpl" fr.liglab.adele.icasa.command.handler:c
- ommandprovider { $namespace="followme" fr.liglab.adele.icasa.command.
- handler:command { $method="setIlluminancePreference" }fr.liglab.adele
- .icasa.command.handler:command { $method="getIlluminancePreference" }
- fr.liglab.adele.icasa.command.handler:command { $method="setEnergySav
- ingGoal" }fr.liglab.adele.icasa.command.handler:command { $method="ge
- tEnergyGoal" }}requires { $field="m_administrationService" }manipulat
- ion { $classname="org.tp.fmm.command.FollowMeCommandImpl" field { $na
- me="m_administrationService" $type="org.tp.fmm.FollowMeAdministration
- " }method { $name="setIlluminancePreference" $arguments="{java.lang.S
- tring}" $names="{goal}" }method { $name="getIlluminancePreference" }m
- ethod { $name="setEnergySavingGoal" $arguments="{java.lang.String}" $
- names="{goal}" }method { $name="getEnergyGoal" }}}
+ field { $name="personLocationService" $type="fr.liglab.adele.icasa.se
+ rvice.location.PersonLocationService" }field { $name="preferencesServ
+ ice" $type="fr.liglab.adele.icasa.service.preferences.Preferences" }m
+ ethod { $name="setUserPreferences" }method { $name="setIlluminancePre
+ ference" $arguments="{java.lang.String,org.tp.fmm.IlluminanceGoal}" $
+ names="{person,illuminanceGoal}" }method { $name="getIlluminancePrefe
+ rence" $return="org.tp.fmm.IlluminanceGoal" }method { $name="stop" }m
+ ethod { $name="start" }method { $name="setEnergySavingGoal" $argument
+ s="{org.tp.fmm.EnergyGoal}" $names="{energyGoal}" }method { $name="ge
+ tEnergyGoal" $return="org.tp.fmm.EnergyGoal" }}}component { $name="or
+ g.tp.fmm.command.FollowMeCommandImpl" $classname="org.tp.fmm.command.
+ FollowMeCommandImpl" fr.liglab.adele.icasa.command.handler:commandpro
+ vider { $namespace="followme" fr.liglab.adele.icasa.command.handler:c
+ ommand { $method="setIlluminancePreference" }fr.liglab.adele.icasa.co
+ mmand.handler:command { $method="getIlluminancePreference" }fr.liglab
+ .adele.icasa.command.handler:command { $method="setEnergySavingGoal" 
+ }fr.liglab.adele.icasa.command.handler:command { $method="getEnergyGo
+ al" }}requires { $field="m_administrationService" }manipulation { $cl
+ assname="org.tp.fmm.command.FollowMeCommandImpl" field { $name="m_adm
+ inistrationService" $type="org.tp.fmm.FollowMeAdministration" }method
+  { $name="setIlluminancePreference" $arguments="{java.lang.String,jav
+ a.lang.String}" $names="{person,goal}" }method { $name="getIlluminanc
+ ePreference" }method { $name="setEnergySavingGoal" $arguments="{java.
+ lang.String}" $names="{goal}" }method { $name="getEnergyGoal" }}}
 

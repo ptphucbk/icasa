@@ -5,13 +5,27 @@ import org.tp.fmm.FollowMeAdministration;
 import org.tp.fmm.IlluminanceGoal;
 import org.tp.bfm.config.FollowMeConfig;
 
+import fr.liglab.adele.icasa.service.location.PersonLocationService;
+import fr.liglab.adele.icasa.service.preferences.Preferences;
+
 public class FollowMeManagerImpl implements FollowMeAdministration {
 
 	/** Field for configService dependency */
 	private FollowMeConfig configService;
-
+	/** Preferences services */
+	private Preferences preferencesService;
+	/** Location services */
+    private PersonLocationService personLocationService; //...
+	
+    @Override
+    public void setUserPreferences(){
+    	preferencesService.setUserPropertyValue("Alice", USER_PROP_ILLUMINANCE, USER_PROP_ILLUMINANCE_VALUE_SOFT);
+    	preferencesService.setUserPropertyValue("Paul", USER_PROP_ILLUMINANCE, USER_PROP_ILLUMINANCE_VALUE_MEDIUM);
+    	preferencesService.setUserPropertyValue("Mary", USER_PROP_ILLUMINANCE, USER_PROP_ILLUMINANCE_VALUE_FULL);
+    }
+    
 	@Override
-	public void setIlluminancePreference(IlluminanceGoal illuminanceGoal) {
+	public void setIlluminancePreference(String person, IlluminanceGoal illuminanceGoal) {
 		// TODO Auto-generated method stub
 		configService.setMaximumNumberOfLightsToTurnOn(illuminanceGoal.getNumberOfLightsToTurnOn());
 		configService.setTargetedIlluminance(illuminanceGoal.getIlluminanceValue());
