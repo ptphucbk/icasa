@@ -1102,3 +1102,18 @@ org.osgi.framework.BundleException: Could not resolve module: org.ow2.chameleon.
 
 !ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-19 14:52:38.069
 !MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-19 15:35:41.363
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-19 15:46:41.987
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-19 15:47:02.233
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-19 16:02:16.240
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-19 16:10:27.042
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
