@@ -1,0 +1,118 @@
+package org.tp.fmm.impl;
+
+import java.util.Set;
+
+import org.tp.fmm.EnergyGoal;
+import org.tp.fmm.FollowMeAdministration;
+import org.tp.fmm.IlluminanceGoal;
+import org.tp.bfm.config.FollowMeConfig;
+
+import fr.liglab.adele.icasa.service.location.PersonLocationService;
+import fr.liglab.adele.icasa.service.preferences.Preferences;
+
+public class FollowMeManagerImpl implements FollowMeAdministration {
+
+	/** Field for configService dependency */
+	private FollowMeConfig configService;
+	/** Preferences services */
+	private Preferences preferencesService;
+	/** Location services */
+	private PersonLocationService personLocationService; // ...
+
+	@Override
+	public void setIlluminancePreference(String person, String goal) {
+		// TODO Auto-generated method stub
+		preferencesService.setUserPropertyValue(person, USER_PROP_ILLUMINANCE, goal);
+		IlluminanceGoal illuminanceGoal;
+		Set<String> names;
+		names = personLocationService.getPersonInZone("livingroom");
+		names.addAll(personLocationService.getPersonInZone("kitchen"));
+		names.addAll(personLocationService.getPersonInZone("bedroom"));
+		names.addAll(personLocationService.getPersonInZone("bathroom"));
+
+		int maxLightsOn = 0;
+		double targetedIlluminance = 0;
+
+		for (Object object : names) {
+			String element = (String) object;
+			System.out.println("Person in livingroom " + element);
+			goal = (String) preferencesService.getUserPropertyValue(element, USER_PROP_ILLUMINANCE);
+			System.out.println("Person in livingroom " + element + "with goal " + goal);
+			// TODO : Here you have to convert the goal string into an
+			// illuminance
+			// goal and fail if the entry is not "SOFT", "MEDIUM" or "HIGH"
+			if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_SOFT)) {
+				illuminanceGoal = IlluminanceGoal.SOFT;
+			} else if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_MEDIUM)) {
+				illuminanceGoal = IlluminanceGoal.MEDIUM;
+			} else if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_FULL)) {
+				illuminanceGoal = IlluminanceGoal.FULL;
+			} else {
+				illuminanceGoal = null;
+			}
+			if (illuminanceGoal != null) {
+				if (maxLightsOn < illuminanceGoal.getNumberOfLightsToTurnOn()) {
+					maxLightsOn = illuminanceGoal.getNumberOfLightsToTurnOn();
+				}
+			}
+			targetedIlluminance += illuminanceGoal.getIlluminanceValue();
+		}
+		if (names.size() > 0){
+			targetedIlluminance = targetedIlluminance / names.size();
+		}
+		configService.setMaximumNumberOfLightsToTurnOn(maxLightsOn);
+		configService.setTargetedIlluminance(targetedIlluminance);
+		System.out.println("maxLightsOn " + maxLightsOn + "targetedIlluminance " + targetedIlluminance);
+
+	}
+
+	@Override
+	public IlluminanceGoal getIlluminancePreference() {
+		IlluminanceGoal illuminanceGoal;
+		if (configService.getMaximumNumberOfLightsToTurnOn() == 1) {
+			illuminanceGoal = IlluminanceGoal.SOFT;
+		} else if (configService.getMaximumNumberOfLightsToTurnOn() == 2) {
+			illuminanceGoal = IlluminanceGoal.MEDIUM;
+		} else if (configService.getMaximumNumberOfLightsToTurnOn() == 3) {
+			illuminanceGoal = IlluminanceGoal.FULL;
+		} else {
+			illuminanceGoal = null;
+		}
+		// System.out.println("getIlluminancePreference");
+		return illuminanceGoal;
+	}
+
+	/** Component Lifecycle Method */
+	public void stop() {
+		// TODO: Add your implementation code here
+	}
+
+	/** Component Lifecycle Method */
+	public void start() {
+		// TODO: Add your implementation code here
+	}
+
+	@Override
+	public void setEnergySavingGoal(EnergyGoal energyGoal) {
+		// TODO Auto-generated method stub
+		configService.setMaximumAllowedEnergyInRoom(energyGoal.getMaximumEnergyInRoom());
+	}
+
+	@Override
+	public EnergyGoal getEnergyGoal() {
+		// TODO Auto-generated method stub
+		EnergyGoal energyGoal;
+		if (configService.getMaximumAllowedEnergyInRoom() == 100d) {
+			energyGoal = EnergyGoal.LOW;
+		} else if (configService.getMaximumAllowedEnergyInRoom() == 250d) {
+			energyGoal = EnergyGoal.MEDIUM;
+		} else if (configService.getMaximumAllowedEnergyInRoom() == 1000d) {
+			energyGoal = EnergyGoal.HIGH;
+		} else {
+			energyGoal = null;
+		}
+		// System.out.println("getIlluminancePreference");
+		return energyGoal;
+	}
+
+}

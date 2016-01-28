@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ipojo xmlns="org.apache.felix.ipojo">
+  <component classname="org.tp.fmm.impl.FollowMeManagerImpl" name="FollowMeManager">
+    <provides specifications="org.tp.fmm.FollowMeAdministration"/>
+    <callback method="start" transition="validate"/>
+    <callback method="stop" transition="invalidate"/>
+    <requires specification="org.tp.bfm.config.FollowMeConfig" field="configService"/>
+    <requires specification="fr.liglab.adele.icasa.service.preferences.Preferences" field="preferences"/>
+  </component>
+  <instance component="FollowMeManager" name="FollowMeMan"/>
+</ipojo>

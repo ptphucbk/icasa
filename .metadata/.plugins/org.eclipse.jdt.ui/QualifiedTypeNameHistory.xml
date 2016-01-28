@@ -12,11 +12,15 @@
 <fullyQualifiedTypeName name="fr.liglab.adele.icasa.device.light.DimmerLight"/>
 <fullyQualifiedTypeName name="org.tp.bfm.config.FollowMeConfig"/>
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
-<fullyQualifiedTypeName name="org.tp.fmm.IlluminanceGoal"/>
 <fullyQualifiedTypeName name="org.tp.fmm.FollowMeAdministration"/>
 <fullyQualifiedTypeName name="fr.liglab.adele.icasa.device.light.Photometer"/>
 <fullyQualifiedTypeName name="java.awt.Dimension"/>
 <fullyQualifiedTypeName name="fr.liglab.adele.icasa.service.preferences.Preferences"/>
 <fullyQualifiedTypeName name="fr.liglab.adele.icasa.service.location.PersonLocationService"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="org.tp.fmm.IlluminanceGoal"/>
+<fullyQualifiedTypeName name="fr.liglab.adele.icasa.service.scheduler.PeriodicRunnable"/>
+<fullyQualifiedTypeName name="fr.liglab.adele.icasa.clockservice.Clock"/>
+<fullyQualifiedTypeName name="org.tp.bfm.time.MomentOfTheDay"/>
 </qualifiedTypeNameHistroy>

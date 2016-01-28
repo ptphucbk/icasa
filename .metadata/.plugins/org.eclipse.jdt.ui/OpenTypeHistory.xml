@@ -4,6 +4,10 @@
 <typeInfo handle="=BinaryLightsFollowMe/\/home\/ptphucbk\/MASTER2\/POLYTECHNIQUE\/SAR\/icasa.teaching.distribution\/runtime\/context.api-1.2.7-SNAPSHOT.jar&lt;fr.liglab.adele.icasa.device.presence(PresenceSensor.class[PresenceSensor" modifiers="1537" timestamp="1449204760000"/>
 <typeInfo handle="=BinaryLightsFollowMe/\/home\/ptphucbk\/MASTER2\/POLYTECHNIQUE\/SAR\/icasa.teaching.distribution\/runtime\/context.api-1.2.7-SNAPSHOT.jar&lt;fr.liglab.adele.icasa.device.light(DimmerLight.class[DimmerLight" modifiers="1537" timestamp="1449204760000"/>
 <typeInfo handle="=BinaryLightsFollowMe/src&lt;org.tp.bfm.config{FollowMeConfig.java[FollowMeConfig" modifiers="513" timestamp="1453137188000"/>
-<typeInfo handle="=FollowMeManager/src&lt;org.tp.fmm{FollowMeAdministration.java[FollowMeAdministration" modifiers="513" timestamp="1452948630000"/>
+<typeInfo handle="=FollowMeManager/src&lt;org.tp.fmm{FollowMeAdministration.java[FollowMeAdministration" modifiers="513" timestamp="1453976316000"/>
 <typeInfo handle="=BinaryLightsFollowMe/\/home\/ptphucbk\/MASTER2\/POLYTECHNIQUE\/SAR\/icasa.teaching.distribution\/runtime\/context.api-1.2.7-SNAPSHOT.jar&lt;fr.liglab.adele.icasa.device.light(Photometer.class[Photometer" modifiers="1537" timestamp="1449204760000"/>
+<typeInfo handle="=FollowMeManager/\/home\/ptphucbk\/MASTER2\/POLYTECHNIQUE\/SAR\/icasa.teaching.distribution\/runtime\/technical.services.api-1.2.7-SNAPSHOT.jar&lt;fr.liglab.adele.icasa.service.preferences(Preferences.class[Preferences" modifiers="1537" timestamp="1449204760000"/>
+<typeInfo handle="=FollowMeManager/\/home\/ptphucbk\/MASTER2\/POLYTECHNIQUE\/SAR\/icasa.teaching.distribution\/runtime\/technical.services.api-1.2.7-SNAPSHOT.jar&lt;fr.liglab.adele.icasa.service.location(PersonLocationService.class[PersonLocationService" modifiers="1537" timestamp="1449204760000"/>
+<typeInfo handle="=BinaryLightsFollowMe/src&lt;org.tp.bfm.time{MomentOfTheDayService.java[MomentOfTheDayService" modifiers="513" timestamp="1453970220000"/>
+<typeInfo handle="=BinaryLightsFollowMe/\/home\/ptphucbk\/MASTER2\/POLYTECHNIQUE\/SAR\/icasa.teaching.distribution\/runtime\/technical.services.api-1.2.7-SNAPSHOT.jar&lt;fr.liglab.adele.icasa.service.scheduler(PeriodicRunnable.class[PeriodicRunnable" modifiers="1537" timestamp="1449204760000"/>
 </typeInfoHistroy>

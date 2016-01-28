@@ -5,6 +5,9 @@
     <callback method="start" transition="validate"/>
     <callback method="stop" transition="invalidate"/>
     <requires specification="org.tp.bfm.config.FollowMeConfig" field="configService"/>
+    <requires specification="fr.liglab.adele.icasa.service.preferences.Preferences" field="preferencesService"/>
+    <requires specification="fr.liglab.adele.icasa.service.location.PersonLocationService" field="personLocationService"/>
+    <requires specification="org.tp.bfm.time.MomentOfTheDayService" field="momentOfTheDay"/>
   </component>
   <instance component="FollowMeManager" name="FollowMeMan"/>
 </ipojo>

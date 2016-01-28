@@ -20,14 +20,14 @@ public interface FollowMeAdministration {
      * @param illuminanceGoal
      *            the new illuminance preference
      */
-    public void setIlluminancePreference(String person, IlluminanceGoal illuminanceGoal);
+    public void setIlluminancePreference(String person, String goal);
  
     /**
      * Get the current illuminance preference.
      * 
      * @return the new illuminance preference
      */
-    public IlluminanceGoal getIlluminancePreference();
+    public void getIlluminancePreference();
     /**
      * Configure the energy saving goal.
      * @param energyGoal : the targeted energy goal.
@@ -41,6 +41,6 @@ public interface FollowMeAdministration {
      */
     public EnergyGoal getEnergyGoal();
 
-	public void setUserPreferences();
+	void getMoment();
  
 }

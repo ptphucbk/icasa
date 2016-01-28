@@ -32,38 +32,15 @@ public class FollowMeCommandImpl {
     // Each command should start with a @Command annotation
     @Command
     public void setIlluminancePreference(String person, String goal) {
-        // The targeted goal
-        IlluminanceGoal illuminanceGoal;
- 
-        // TODO : Here you have to convert the goal string into an illuminance
-        // goal and fail if the entry is not "SOFT", "MEDIUM" or "HIGH"
-        if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_SOFT)){
-        	illuminanceGoal = IlluminanceGoal.SOFT;
-        } else if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_MEDIUM)){
-        	illuminanceGoal = IlluminanceGoal.MEDIUM;
-        } else if (goal.equals(FollowMeAdministration.USER_PROP_ILLUMINANCE_VALUE_FULL)){
-        	illuminanceGoal = IlluminanceGoal.FULL;
-        } else {
-        	illuminanceGoal = null;
-        }
+        System.out.println("The illuminance preference of " + person + " is " + goal);
         //call the administration service to configure it :
-        m_administrationService.setIlluminancePreference(person, illuminanceGoal);
+        m_administrationService.setIlluminancePreference(person, goal);
     }
  
     @Command
     public void getIlluminancePreference(){
         //TODO : implement the command that print the current value of the goal
-    	IlluminanceGoal illuminanceGoal;
-    	illuminanceGoal = m_administrationService.getIlluminancePreference();
-    	if (illuminanceGoal.getNumberOfLightsToTurnOn() == 1){
-    		System.out.println("The illuminance goal is SOFT " + illuminanceGoal.getIlluminanceValue());
-    	} else if (illuminanceGoal.getNumberOfLightsToTurnOn() == 2){
-    		System.out.println("The illuminance goal is MEDIUM " + illuminanceGoal.getIlluminanceValue());
-    	} else if (illuminanceGoal.getNumberOfLightsToTurnOn() == 3){
-    		System.out.println("The illuminance goal is FULL " + illuminanceGoal.getIlluminanceValue());
-    	} else {
-    		System.out.println("The illuminance goal is out of range [1 - 3]");
-    	}
+    	m_administrationService.getIlluminancePreference();
     }
     @Command
     public void setEnergySavingGoal(String goal) {
@@ -99,6 +76,11 @@ public class FollowMeCommandImpl {
     	} else {
     		System.out.println("The illuminance goal is out of range");
     	}
+    }
+    
+    @Command
+    public void getMoment(){
+    	m_administrationService.getMoment();
     }
  
 }

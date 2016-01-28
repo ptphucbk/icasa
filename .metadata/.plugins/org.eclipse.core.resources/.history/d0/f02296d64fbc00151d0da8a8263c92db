@@ -1,5 +1,0 @@
-package org.tp.fmm;
-
-public enum Energy {
-
-}

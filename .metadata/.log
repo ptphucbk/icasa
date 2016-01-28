@@ -1117,3 +1117,241 @@ org.osgi.framework.BundleException: Could not resolve module: org.ow2.chameleon.
 
 !ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-19 16:10:27.042
 !MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+!SESSION 2016-01-26 20:39:54.986 -----------------------------------------------
+eclipse.buildId=4.5.0.I20140806-2000
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.m2e 4 0 2016-01-26 20:39:57.018
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.ow2.chameleon.eclipse.ipojo.m2e [288]
+  Unresolved requirement: Import-Package: org.apache.maven.model
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 21:04:13.131
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 21:04:14.655
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 21:04:30.871
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 22:19:34.112
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 22:21:30.003
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 22:21:51.147
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 22:31:12.447
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 22:31:49.573
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-26 23:35:40.259
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 4 0 2016-01-27 00:02:38.043
+!MESSAGE FollowMeManager: The field preferences is referenced in the metadata but does not exist in the org.tp.fmm.impl.FollowMeManagerImpl class
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 4 0 2016-01-27 00:02:38.856
+!MESSAGE FollowMeManager: The field preferences is referenced in the metadata but does not exist in the org.tp.fmm.impl.FollowMeManagerImpl class
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:27:06.820
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:28:08.927
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:28:30.525
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:28:49.666
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:29:20.097
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:29:47.400
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:34:40.812
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:49:12.406
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:52:13.680
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 13:53:48.155
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 14:29:52.018
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 14:29:57.278
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 14:30:38.622
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-27 14:30:43.260
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+!SESSION 2016-01-28 08:18:17.816 -----------------------------------------------
+eclipse.buildId=4.5.0.I20140806-2000
+java.version=1.8.0_72
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.m2e 4 0 2016-01-28 08:18:26.255
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.ow2.chameleon.eclipse.ipojo.m2e [288]
+  Unresolved requirement: Import-Package: org.apache.maven.model
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 08:22:22.236
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 08:36:52.767
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 08:36:58.044
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 08:37:00.971
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 08:37:23.573
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 08:37:38.415
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 09:39:42.847
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 09:50:24.408
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 09:50:26.903
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:00:44.275
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:03:09.188
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:04:25.749
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:14:29.818
+!MESSAGE BinaryLightsFollowMe: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:18:36.449
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:20:23.063
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:27:26.579
+!MESSAGE FollowMeManager: Project manipulation canceled: project has errors
+!SESSION 2016-01-28 10:29:26.454 -----------------------------------------------
+eclipse.buildId=4.5.0.I20140806-2000
+java.version=1.8.0_72
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.m2e 4 0 2016-01-28 10:29:28.821
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.ow2.chameleon.eclipse.ipojo.m2e [288]
+  Unresolved requirement: Import-Package: org.apache.maven.model
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:43:03.052
+!MESSAGE MomentOfTheDay: Neither component types, nor instances in the XML metadata
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:43:04.338
+!MESSAGE MomentOfTheDay: Neither component types, nor instances in the XML metadata
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:43:56.289
+!MESSAGE MomentOfTheDay: Neither component types, nor instances in the XML metadata
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 4 0 2016-01-28 10:46:24.818
+!MESSAGE MomentOfTheDay: Cannot find bytecode for class '': no bytecode found.
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 4 0 2016-01-28 10:46:25.141
+!MESSAGE MomentOfTheDay: Cannot find bytecode for class '': no bytecode found.
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 4 0 2016-01-28 10:46:47.089
+!MESSAGE MomentOfTheDay: Cannot find bytecode for class '': no bytecode found.
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 4 0 2016-01-28 10:46:47.708
+!MESSAGE MomentOfTheDay: Cannot find bytecode for class '': no bytecode found.
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:49:52.616
+!MESSAGE MomentOfTheDay: Neither component types, nor instances in the XML metadata
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.nature 2 0 2016-01-28 10:52:54.539
+!MESSAGE MomentOfTheDay: Neither component types, nor instances in the XML metadata
+!SESSION 2016-01-28 10:56:34.733 -----------------------------------------------
+eclipse.buildId=4.5.0.I20140806-2000
+java.version=1.8.0_72
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.standard.product
+
+!ENTRY org.ow2.chameleon.eclipse.ipojo.m2e 4 0 2016-01-28 10:56:36.466
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.ow2.chameleon.eclipse.ipojo.m2e [288]
+  Unresolved requirement: Import-Package: org.apache.maven.model
+
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
